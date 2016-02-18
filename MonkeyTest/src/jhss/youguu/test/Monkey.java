@@ -207,15 +207,14 @@ public class Monkey {
         String time = Outlog.log.time();
         String path = Monkey_Menu.path;
         
-        if(!(new File(path).isDirectory()))
-    	{
-    	new File(path).mkdir();
-    
-    	}
+        //目录不存在则创建。
+        if(!(new File(path).isDirectory())){
+        	new File(path).mkdir();
+        }
+        //创建crash日志文件。
         File file = new File(path + File.separator + time + ".txt");
         File crashFile = new File(path+"Crash_log/"+Outlog.log.time()+".txt");
-//        File file = new File("data/local/tmp" + File.separator + time + ".txt");
-        
+
         try {
 //       	 String[] args = new String[]{"cmd","/c",command};
             Process p = Runtime.getRuntime().exec(command);
