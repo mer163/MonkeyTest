@@ -21,6 +21,8 @@ import Outlog.log;
 public class Monkey {
 
 	
+	
+
 	public static void main(String []args) throws IOException, InterruptedException
 	{
 		
@@ -207,6 +209,7 @@ public class Monkey {
         String path = Monkey_Menu.path;
         Boolean flag = false;
         Boolean success = false;
+        double testTime;
         
         if(!(new File(path).isDirectory())){
         	new File(path).mkdir();
@@ -254,6 +257,12 @@ public class Monkey {
                 		success = true;
                 	}
                 }
+                if (line.startsWith("## Network stats:")) {
+                    fisrt = line.indexOf("=");
+                    end = line.indexOf("ms");
+                    testTime = Double.valueOf(line.substring(fisrt + 1, end)).doubleValue() / 1000.0D / 60.0D;
+                    
+                  }
                 if(flag){
                 	if(line.startsWith("// ")){
                 		text.append(line+"\n");
