@@ -226,6 +226,7 @@ public class Monkey {
 					true), "UTF-8");
             
             String line = null;
+            System.out.println("testing");
             
             while ((line = br.readLine()) != null) {
             if("".equals(line.trim())) continue;
