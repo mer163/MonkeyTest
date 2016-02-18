@@ -178,7 +178,7 @@ private static final long serialVersionUID = 1L;
 		 JLabel lable11 = new JLabel("日志路径：");
 		 frame1.add(lable11);
 		 lable11.setBounds(20, 325, 200, 35);   
-	     final JTextField JText11 = new JTextField("D:/log/Monkey_log/");
+	     final JTextField JText11 = new JTextField("D:/log/");
 		 frame1.add(JText11);
 		 JText11.setBounds(90, 325, 200, 35); 
 		 
@@ -354,7 +354,7 @@ private static final long serialVersionUID = 1L;
 							}
 							if(box.getSelectedItem().equals("2秒"))
 							{
-								throttle="--throttle "+20000;
+								throttle="--throttle "+2000;
 							}
 							//设备数为0时弹出提示框。
 							if(devices.size()==0){

@@ -255,13 +255,12 @@ public class Monkey {
                 	}
                 }
                 if(flag){
-                	if(!line.equals("// ")){
+                	if(line.startsWith("// ")){
                 		text.append(line+"\n");
                 		crashLog.append(line+"\n");	//写入日志
                 		writer1.write(line+"\r\n");
-        				writer1.write("\r\n");
                 	}else{
-                		flag = false;	//当日志不是以 "// "起始时则将flag设置为false。
+//                		flag = false;	//当日志不是以 "// "起始时则将flag设置为false。
                 	}
                 }	
                 
