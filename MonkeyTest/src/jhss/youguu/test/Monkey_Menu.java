@@ -354,7 +354,7 @@ private static final long serialVersionUID = 1L;
 							}
 							if(box.getSelectedItem().equals("2秒"))
 							{
-								throttle="--throttle "+2000;
+								throttle="--throttle "+20000;
 							}
 							//设备数为0时弹出提示框。
 							if(devices.size()==0){

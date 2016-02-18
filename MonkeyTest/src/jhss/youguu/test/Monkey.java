@@ -206,14 +206,16 @@ public class Monkey {
         String str2 = null;
         String time = Outlog.log.time();
         String path = Monkey_Menu.path;
+        Boolean flag = false;
+        Boolean success = false;
         
         if(!(new File(path).isDirectory()))
     	{
     	new File(path).mkdir();
     
     	}
-        File file = new File(path + File.separator + time + ".txt");
-        File crashFile = new File("D:\\log\\Crash_log\\"+Outlog.log.time()+".txt");
+        File file = new File(path + "Monkey_log/" + time + ".txt");
+        File crashFile = new File(path+ "Crash_log/"+Outlog.log.time()+".txt");
 //        File file = new File("data/local/tmp" + File.separator + time + ".txt");
         
         try {
@@ -222,61 +224,48 @@ public class Monkey {
             br = new BufferedReader(new InputStreamReader(p.getInputStream()));
             Writer writer = new OutputStreamWriter(new FileOutputStream(file,
 					true), "UTF-8");
-            Writer writer1 = new OutputStreamWriter(new FileOutputStream(file,
+            Writer writer1 = new OutputStreamWriter(new FileOutputStream(crashFile,
 					true), "UTF-8");
             
             String line = null;
-           
-            
             while ((line = br.readLine()) != null) {
             if("".equals(line.trim())) continue;
-
-//                stringBuffer.append(line+"\n");
-//                System.out.println(line);
+            	int fisrt;
+            	int end;
                 text.append(line+"\n");
                 // 日志写入电脑磁盘中。
                 
 				writer.write(line);
 				writer.write("\r\n");
 				stringBuffer1.append(line+"\n");
-								
-                if (line.startsWith("// ")){
-//               	 while((line).contains("// ")){
-               		 stringBuffer.append(line+"\n");
+				//发现崩溃，将flag设置为true，				
+                if (line.startsWith("// CRASH: " + pkgname)){
+//               	while((line).contains("// ")){
+                	
+               		stringBuffer.append(line+"\n");	//写入日志
+               		writer1.write(line);
+    				writer1.write("\r\n");
+               		flag = true;
                 }
-            }
-            writer.close();
-            
-            ret[0] = stringBuffer1.toString(); //保存完整内容。
-            str2 = stringBuffer.toString();		//保存 包含"// "的内容。
-            String str3[] = str2.split("\r\n");
-            Boolean find = false;
-            for (int i=0;i<str3.length;i++){
-            	
-            	if(str3[i].startsWith("// CRASH: "+ pkgname)){
-//               	ret[1] = str2.substring(str2.indexOf("// CRASH: "+pkgname)); //截取后翻入字符串数组中。
-                	ret[1]+=str3[i];
-                	find = true;
-            	}
                 else{
-                	if(find){
-                		ret[1]+=str3[i];
-                		
-                		if(str3[i].equals("// "+"\n")){
-                			find = false;
-                		}
-                		
+                	if(line.equalsIgnoreCase("Events injected: ")){
+                		success = true;
                 	}
                 }
-            	 
-                }
-            //写文件，
-           	if(ret[1]!=null){
-           		writer1.write(ret[1]);
-           	}
-           	writer1.close();  
-            
-            
+                if(flag){
+                	if(!line.startsWith(":")){
+                		stringBuffer.append(line+"\n");	//写入日志
+                		writer1.write(line);
+        				writer1.write("\r\n");
+                	}else{
+                		flag = false;	//当日志不是以 "// "起始时则将flag设置为false。
+                	}
+                }	
+                
+            }
+            writer.close();
+            writer1.close();
+          
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
