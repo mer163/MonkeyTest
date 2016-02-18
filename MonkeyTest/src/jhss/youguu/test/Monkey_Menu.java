@@ -388,11 +388,12 @@ private static final long serialVersionUID = 1L;
 								    	monkeyResult = Monkey.getCrash(cmd,packageName,txt);
 								    	goback();
 			//					    	Outlog.log.writelogs("D:/log/Monkey_log",time,"monkey运行日志：\n总共循环"+counts+"次，第"+i+"次循环monkey\n"+monkey[0]);
-								    	if(monkeyResult[1]!=null){
-								    		Outlog.log.writelogs("D:/log/Crash_log",DevicesName+time,"应用crash发生：\n发生时间：\n"+time+"设备名称："+DevicesName+"\n"+monkeyResult[1]); //crash发生后写入日志文件。
-								    	}else{
-								    		System.out.println("执行完成，请在日志中查看详情.");
-								    		}
+								    	
+//								    	if(monkeyResult[1]!=null){
+//								    		Outlog.log.writelogs("D:/log/Crash_log",DevicesName+time,"应用crash发生：\n发生时间：\n"+time+"设备名称："+DevicesName+"\n"+monkeyResult[1]); //crash发生后写入日志文件。
+//								    	}else{
+//								    		System.out.println("执行完成，请在日志中查看详情.");
+//								    		}
 									}
 								    
 							    }

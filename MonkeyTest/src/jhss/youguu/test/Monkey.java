@@ -200,10 +200,9 @@ public class Monkey {
 	public static String[] getCrash(String command,String pkgname,JTextArea text)
     {
         BufferedReader br = null;
-        StringBuffer stringBuffer = new StringBuffer();
-        StringBuffer stringBuffer1 = new StringBuffer();
+        StringBuffer totalLog = new StringBuffer();
+        StringBuffer crashLog = new StringBuffer();
         String[] ret = new String[2];
-        String str2 = null;
         String time = Outlog.log.time();
         String path = Monkey_Menu.path;
         Boolean flag = false;
@@ -232,17 +231,21 @@ public class Monkey {
             if("".equals(line.trim())) continue;
             	int fisrt;
             	int end;
-                text.append(line+"\n");
+//                text.append(line+"\n");
                 // 日志写入电脑磁盘中。
                 
 				writer.write(line);
 				writer.write("\r\n");
-				stringBuffer1.append(line+"\n");
+				totalLog.append(line+"\n");
 				//发现崩溃，将flag设置为true，				
                 if (line.startsWith("// CRASH: " + pkgname)){
 //               	while((line).contains("// ")){
-                	
-               		stringBuffer.append(line+"\n");	//写入日志
+                	text.append("应用："+pkgname+" crash发生，开始捕捉崩溃日志。\n");
+                	text.append("--------------------------------------\n");
+                	text.append(line+"\n");
+               		crashLog.append(line+"\n");	//写入日志
+               		
+               		writer1.write("应用："+pkgname+" crash发生，开始捕捉崩溃日志。\n"+"--------------------------------------\n");
                		writer1.write(line);
     				writer1.write("\r\n");
                		flag = true;
@@ -254,7 +257,8 @@ public class Monkey {
                 }
                 if(flag){
                 	if(!line.startsWith(":")){
-                		stringBuffer.append(line+"\n");	//写入日志
+                		text.append(line+"\n");
+                		crashLog.append(line+"\n");	//写入日志
                 		writer1.write(line);
         				writer1.write("\r\n");
                 	}else{
@@ -265,6 +269,8 @@ public class Monkey {
             }
             writer.close();
             writer1.close();
+            ret[0]= totalLog.toString();
+            ret[1]= crashLog.toString();
           
         } catch (Exception e) {
             e.printStackTrace();
