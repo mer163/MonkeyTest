@@ -226,6 +226,11 @@ public class Monkey {
 					true), "UTF-8");
             
             String line = null;
+<<<<<<< HEAD
+=======
+            System.out.println("testing");
+            
+>>>>>>> dev
             while ((line = br.readLine()) != null) {
             	if("".equals(line.trim())) continue;
                 text.append(line+"\n");
