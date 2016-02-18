@@ -202,40 +202,41 @@ public class Monkey {
         BufferedReader br = null;
         StringBuffer stringBuffer = new StringBuffer();
         StringBuffer stringBuffer1 = new StringBuffer();
-        String[] ret = new String[2];	//保存返回结果。
+        String[] ret = new String[2];
         String str2 = null;
         String time = Outlog.log.time();
-        String log = Monkey_Menu.path;
+        String path = Monkey_Menu.path;
         
-        //目录不存在则创建。
-        if(!(new File(log).isDirectory())){
-        	new File(log).mkdir();
-        }
+        if(!(new File(path).isDirectory()))
+    	{
+    	new File(path).mkdir();
+    
+    	}
+        File file = new File(path + File.separator + time + ".txt");
+        File crashFile = new File("D:\\log\\Crash_log\\"+Outlog.log.time()+".txt");
+//        File file = new File("data/local/tmp" + File.separator + time + ".txt");
         
-        //创建crash日志文件。
-        File monkeyLog = new File(log + File.separator + time + ".txt");
-        File crashLog = new File(log+"Crash_log/"+Outlog.log.time()+".txt");
-
         try {
 //       	 String[] args = new String[]{"cmd","/c",command};
             Process p = Runtime.getRuntime().exec(command);
             br = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            Writer writer = new OutputStreamWriter(new FileOutputStream(monkeyLog,
+            Writer writer = new OutputStreamWriter(new FileOutputStream(file,
 					true), "UTF-8");
-            Writer writer1 = new OutputStreamWriter(new FileOutputStream(crashLog,
+            Writer writer1 = new OutputStreamWriter(new FileOutputStream(file,
 					true), "UTF-8");
             
             String line = null;
-<<<<<<< HEAD
-=======
-            System.out.println("testing");
+           
             
->>>>>>> dev
             while ((line = br.readLine()) != null) {
-            	if("".equals(line.trim())) continue;
+            if("".equals(line.trim())) continue;
+
+//                stringBuffer.append(line+"\n");
+//                System.out.println(line);
                 text.append(line+"\n");
                 // 日志写入电脑磁盘中。
-                writer.write(line);
+                
+				writer.write(line);
 				writer.write("\r\n");
 				stringBuffer1.append(line+"\n");
 								
@@ -243,8 +244,6 @@ public class Monkey {
 //               	 while((line).contains("// ")){
                		 stringBuffer.append(line+"\n");
                 }
-                
-    
             }
             writer.close();
             
@@ -461,7 +460,7 @@ public class Monkey {
 	}
 
 
-}
+	}
 
   
 
