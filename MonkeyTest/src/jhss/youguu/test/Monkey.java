@@ -197,23 +197,22 @@ public class Monkey {
 	 * @param command
 	 * @return 返回一个String数组， 第一位代表完整内容，第二位为crash内容。
 	 */
-	public static String[] getCrash(String command,String pkgname,JTextArea text)
+	public static void getCrash(String command,String pkgname,JTextArea text)
     {
         BufferedReader br = null;
         StringBuffer totalLog = new StringBuffer();
         StringBuffer crashLog = new StringBuffer();
-        String[] ret = new String[2];
-        String time = Outlog.log.time();
+//        String[] ret = new String[2];
+//        String time = Outlog.log.time();
         String path = Monkey_Menu.path;
         Boolean flag = false;
         Boolean success = false;
         
-        if(!(new File(path).isDirectory()))
-    	{
-    	new File(path).mkdir();
-    
-    	}
-        File file = new File(path + "Monkey_log/" + time + ".txt");
+        if(!(new File(path).isDirectory())){
+        	new File(path).mkdir();
+       	}
+        
+        File file = new File(path + "Monkey_log/" + Outlog.log.time() + ".txt");
         File crashFile = new File(path+ "Crash_log/"+Outlog.log.time()+".txt");
 //        File file = new File("data/local/tmp" + File.separator + time + ".txt");
         
@@ -256,10 +255,10 @@ public class Monkey {
                 	}
                 }
                 if(flag){
-                	if(!line.startsWith(":")){
+                	if(!line.equals("// ")){
                 		text.append(line+"\n");
                 		crashLog.append(line+"\n");	//写入日志
-                		writer1.write(line);
+                		writer1.write(line+"\r\n");
         				writer1.write("\r\n");
                 	}else{
                 		flag = false;	//当日志不是以 "// "起始时则将flag设置为false。
@@ -269,8 +268,8 @@ public class Monkey {
             }
             writer.close();
             writer1.close();
-            ret[0]= totalLog.toString();
-            ret[1]= crashLog.toString();
+//            ret[0]= totalLog.toString();
+//            ret[1]= crashLog.toString();
           
         } catch (Exception e) {
             e.printStackTrace();
@@ -285,7 +284,7 @@ public class Monkey {
                 }
             }
         }
-        return ret;
+        
     }
 	
 	

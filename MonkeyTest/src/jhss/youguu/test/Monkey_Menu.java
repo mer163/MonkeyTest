@@ -385,7 +385,7 @@ private static final long serialVersionUID = 1L;
 								    	txt.append("---------------------------\n总共循环"+counts+"次，第"+i+"次循环monkey\n");
 								    	System.out.println("start---------------------");
 								    	
-								    	monkeyResult = Monkey.getCrash(cmd,packageName,txt);
+								    	Monkey.getCrash(cmd,packageName,txt);
 								    	goback();
 			//					    	Outlog.log.writelogs("D:/log/Monkey_log",time,"monkey运行日志：\n总共循环"+counts+"次，第"+i+"次循环monkey\n"+monkey[0]);
 								    	
