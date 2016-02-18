@@ -444,7 +444,7 @@ private static final long serialVersionUID = 1L;
 			Check check = new Check();
 			Thread ck = new Thread(check);
 			ck.start();
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 		}
 	}
 	
