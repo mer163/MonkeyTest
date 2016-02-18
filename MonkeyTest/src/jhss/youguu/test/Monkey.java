@@ -202,7 +202,7 @@ public class Monkey {
         BufferedReader br = null;
         StringBuffer stringBuffer = new StringBuffer();
         StringBuffer stringBuffer1 = new StringBuffer();
-        String[] ret = new String[2];
+        String[] ret = new String[2];	//保存返回结果。
         String str2 = null;
         String time = Outlog.log.time();
         String path = Monkey_Menu.path;
@@ -213,7 +213,7 @@ public class Monkey {
     
     	}
         File file = new File(path + File.separator + time + ".txt");
-        File crashFile = new File("D:\\log\\Crash_log\\"+Outlog.log.time()+".txt");
+        File crashFile = new File(path+"Crash_log/"+Outlog.log.time()+".txt");
 //        File file = new File("data/local/tmp" + File.separator + time + ".txt");
         
         try {
@@ -459,7 +459,7 @@ public class Monkey {
 	}
 
 
-	}
+}
 
   
 

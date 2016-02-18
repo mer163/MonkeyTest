@@ -33,7 +33,7 @@ implements ActionListener{
  */
 private static final long serialVersionUID = 1L;
 	public static String text;
-	public static String[] monkey;
+	public static String[] monkeyResult;
 	public int exitCode = 1;  	// 退出码，1为执行monkey，0为不执行。
 	public JPanel frame1 = new JPanel();
 	ArrayList<String> devices = Monkey.getDevices();
@@ -260,147 +260,147 @@ private static final long serialVersionUID = 1L;
 	    
 	    
 		button1.addActionListener(new ActionListener(){//匿名类实现ActionListener接口
-			public void actionPerformed(ActionEvent e)
-			{	
+			public void actionPerformed(ActionEvent e){	
 				new Thread(new Runnable(){
 		            public void run() {
 		        		try {
 		        			
-				String anyevent;
-				String touch;
-				String motion;
-				String trackball;
-				String syskeys;
-				String appswitch;
-				String throttle = null ;
-//				JText0.setText(new Monkey().getDeviceName());
-//				String DevicesName=JText0.getText();
-				DevicesName =box0.getSelectedItem().toString();  //当前选择的设备名称
-				
-				String PackageName = null;
-				if(apps.getSelectedItem().toString()=="优顾炒股"){
-					PackageName = "com.jhss.youguu";
-				}else if (apps.getSelectedItem().toString()=="优顾理财") {
-					PackageName = "jhss.youguu.finance";
-				}
-				String zscount=JText2.getText();
-				if(JText6.getText().isEmpty())
-				{
-				   anyevent=JText6.getText();
-				}
-				else
-				{
-					 anyevent=" --pct-anyevent "+JText6.getText();
-				}
-				
-				if(JText4.getText().isEmpty())
-				{
-					touch=JText4.getText();
-				}
-				else
-				{
-					 touch=" --pct-touch "+JText4.getText();
-				}
-		
-				if(JText5.getText().isEmpty())
-				{
-					motion=JText5.getText();
-				}
-				else
-				{
-					motion=" --pct-motion "+JText5.getText();
-				}
-
-				if(JText7.getText().isEmpty())
-				{
-					trackball=JText7.getText();
-				}
-				else
-				{
-					trackball=" --pct-trackball "+JText7.getText();
-				}
-		
-				if(JText8.getText().isEmpty())
-				{
-					syskeys=JText8.getText();
-				}
-				else
-				{
-					syskeys=" --pct-syskeys "+JText8.getText();
-				}
-				if(JText9.getText().isEmpty())
-				{
-					appswitch=JText9.getText();
-				}
-				else
-				{
-					appswitch=" --pct-appswitch "+JText9.getText();
-				}
-				
-				if(box.getSelectedItem().equals("0"))
-				{
-					throttle="";
-				}
-				if(box.getSelectedItem().equals("0.1秒"))
-				{
-					throttle="--throttle "+100;
-				}
-				if(box.getSelectedItem().equals("0.5秒"))
-				{
-					throttle="--throttle "+500;
-				}
-				if(box.getSelectedItem().equals("1秒"))
-				{
-					throttle="--throttle "+1000;
-				}
-				if(box.getSelectedItem().equals("2秒"))
-				{
-					throttle="--throttle "+2000;
-				}
-				//设备数为0时弹出提示框。
-				if(devices.size()==0){
-					JOptionPane.showMessageDialog(frame1.getRootPane(), "请选择设备", "系统信息", JOptionPane.WARNING_MESSAGE);
-				}	
-				else if (Monkey.isMonkeyRunning(DevicesName)){	//检查当前所选择设备中monkey是否运行中，如果已运行则弹出提示框。
-    				JOptionPane.showMessageDialog(frame1.getRootPane(),
-    						"monkey已经开始运行了!", "系统信息", JOptionPane.WARNING_MESSAGE);		//警告提示框。
-    			}
-				// monkey未运行，则执行下列内容。
-				else{
-					String count=JText1.getText();
-				    path =JText11.getText();
-				    int counts = Integer.parseInt(count_num.getText());	//循环次数
-				    txt.setText("monkey运行日志：\n启动时间："+Outlog.log.time()+"\n");		//默认显示内容。
-				    startListen(); //监听屏幕是否锁定，弱锁定则启动解锁屏幕程序。
-				
-				   //根据循环次数执行monkey循环。
-					for(int i=1;i<=counts;i++){
-//					    	text = Monkey.Monkey(DevicesName, PackageName, zscount,throttle,anyevent, touch, motion, trackball, syskeys,appswitch, count,path);
-						if(exitCode==1){
-							String cmd="adb -s "+DevicesName+" shell monkey -p "+PackageName+ 
-					    			" --ignore-crashes --ignore-timeouts" +" --monitor-native-crashes"
-					    			+ " -s "+zscount+" "+throttle+" "+anyevent+" "+touch+" "
-					    			+motion +" "+trackball +" "+syskeys+" " +appswitch+" -v-v-v "+count;
-//					    			+" > "+path+log.time()+".txt";
-//							System.out.println("cmd:"+cmd);
-					    	txt.append("---------------------------\n总共循环"+counts+"次，第"+i+"次循环monkey\n");
-					    	System.out.println("start---------------------");
-					    	monkey = Monkey.getCrash(cmd,PackageName,txt);
-					    	goback();
-//					    	Outlog.log.writelogs("D:/log/Monkey_log",time,"monkey运行日志：\n总共循环"+counts+"次，第"+i+"次循环monkey\n"+monkey[0]);
-					    	if(monkey[1]!=null){
-					    		Outlog.log.writelogs("D:/log/Crash_log",DevicesName+time,"应用crash发生：\n发生时间：\n"+time+"设备名称："+DevicesName+"\n"+monkey[1]); //crash发生后写入日志文件。
-					    	}else{
-					    		System.out.println("执行完成，请在日志中查看详情.");
-					    		}
+							String anyevent;
+							String touch;
+							String motion;
+							String trackball;
+							String syskeys;
+							String appswitch;
+							String throttle = null ;
+			//				JText0.setText(new Monkey().getDeviceName());
+			//				String DevicesName=JText0.getText();
+							DevicesName =box0.getSelectedItem().toString();  //当前选择的设备名称
+							
+							String packageName = null;
+							if(apps.getSelectedItem().toString()=="优顾炒股"){
+								packageName = "com.jhss.youguu";
+							}else if (apps.getSelectedItem().toString()=="优顾理财") {
+								packageName = "jhss.youguu.finance";
 							}
-					    
-				    }
-				    
+							String zscount=JText2.getText();
+							if(JText6.getText().isEmpty())
+							{
+							   anyevent=JText6.getText();
+							}
+							else
+							{
+								 anyevent=" --pct-anyevent "+JText6.getText();
+							}
+							
+							if(JText4.getText().isEmpty())
+							{
+								touch=JText4.getText();
+							}
+							else
+							{
+								 touch=" --pct-touch "+JText4.getText();
+							}
 					
-					button1.setBackground(Color.LIGHT_GRAY);
-				}
-				
+							if(JText5.getText().isEmpty())
+							{
+								motion=JText5.getText();
+							}
+							else
+							{
+								motion=" --pct-motion "+JText5.getText();
+							}
+			
+							if(JText7.getText().isEmpty())
+							{
+								trackball=JText7.getText();
+							}
+							else
+							{
+								trackball=" --pct-trackball "+JText7.getText();
+							}
+					
+							if(JText8.getText().isEmpty())
+							{
+								syskeys=JText8.getText();
+							}
+							else
+							{
+								syskeys=" --pct-syskeys "+JText8.getText();
+							}
+							if(JText9.getText().isEmpty())
+							{
+								appswitch=JText9.getText();
+							}
+							else
+							{
+								appswitch=" --pct-appswitch "+JText9.getText();
+							}
+							
+							if(box.getSelectedItem().equals("0"))
+							{
+								throttle="";
+							}
+							if(box.getSelectedItem().equals("0.1秒"))
+							{
+								throttle="--throttle "+100;
+							}
+							if(box.getSelectedItem().equals("0.5秒"))
+							{
+								throttle="--throttle "+500;
+							}
+							if(box.getSelectedItem().equals("1秒"))
+							{
+								throttle="--throttle "+1000;
+							}
+							if(box.getSelectedItem().equals("2秒"))
+							{
+								throttle="--throttle "+2000;
+							}
+							//设备数为0时弹出提示框。
+							if(devices.size()==0){
+								JOptionPane.showMessageDialog(frame1.getRootPane(), "请选择设备", "系统信息", JOptionPane.WARNING_MESSAGE);
+							}	
+							else if (Monkey.isMonkeyRunning(DevicesName)){	//检查当前所选择设备中monkey是否运行中，如果已运行则弹出提示框。
+			    				JOptionPane.showMessageDialog(frame1.getRootPane(),
+			    						"monkey已经开始运行了!", "系统信息", JOptionPane.WARNING_MESSAGE);		//警告提示框。
+			    			}
+							// monkey未运行，则执行下列内容。
+							else{
+								String count=JText1.getText();
+							    path =JText11.getText();
+							    int counts = Integer.parseInt(count_num.getText());	//循环次数
+							    txt.setText("monkey运行日志：\n启动时间："+Outlog.log.time()+"\n");		//默认显示内容。
+							    startListen(); //监听屏幕是否锁定，弱锁定则启动解锁屏幕程序。
+							
+							   //根据循环次数执行monkey循环。
+								for(int i=1;i<=counts;i++){
+			//					    	text = Monkey.Monkey(DevicesName, PackageName, zscount,throttle,anyevent, touch, motion, trackball, syskeys,appswitch, count,path);
+									if(exitCode==1){
+										String cmd="adb -s "+DevicesName+" shell monkey -p "+packageName+ 
+								    			" --ignore-crashes --ignore-timeouts" +" --monitor-native-crashes"
+								    			+ " -s "+zscount+" "+throttle+" "+anyevent+" "+touch+" "
+								    			+motion +" "+trackball +" "+syskeys+" " +appswitch+" -v-v-v "+count;
+			//					    			+" > "+path+log.time()+".txt";
+									
+								    	txt.append("---------------------------\n总共循环"+counts+"次，第"+i+"次循环monkey\n");
+								    	System.out.println("start---------------------");
+								    	
+								    	monkeyResult = Monkey.getCrash(cmd,packageName,txt);
+								    	goback();
+			//					    	Outlog.log.writelogs("D:/log/Monkey_log",time,"monkey运行日志：\n总共循环"+counts+"次，第"+i+"次循环monkey\n"+monkey[0]);
+								    	if(monkeyResult[1]!=null){
+								    		Outlog.log.writelogs("D:/log/Crash_log",DevicesName+time,"应用crash发生：\n发生时间：\n"+time+"设备名称："+DevicesName+"\n"+monkeyResult[1]); //crash发生后写入日志文件。
+								    	}else{
+								    		System.out.println("执行完成，请在日志中查看详情.");
+								    		}
+									}
+								    
+							    }
+							    
+								
+								button1.setBackground(Color.LIGHT_GRAY);
+							}
+							
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

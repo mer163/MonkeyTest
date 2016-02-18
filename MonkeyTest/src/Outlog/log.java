@@ -16,7 +16,7 @@ public class log {
 	
 	public static void main(String []args) throws IOException, InterruptedException
 	{
-		
+		writelogs("D:/log/Crash_log", time(), "test:"+time());
 	}
 
 
