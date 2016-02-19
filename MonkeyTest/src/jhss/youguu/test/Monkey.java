@@ -276,10 +276,10 @@ public class Monkey {
             }
             
             if(success){
-            	text.append("本次monkey结束，未发生诚然是，完成！");
-            	writer.write("本次monkey结束，未发生诚然是，完成！");
+            	text.append("本次monkey结束，请查看日志。");
+            	writer.write("本次monkey结束，请查看日志。");
             }else{
-            	text.append("本次monkey结束，检测到crash，请查看crash日志");
+            	text.append("monkey发生未知错误，执行失败。");
             }
                     
             writer.close();
