@@ -253,7 +253,7 @@ public class Monkey {
                		flag = true;
                 }
                 else{
-                	if(line.equalsIgnoreCase("Events injected: ")){
+                	if(line.equalsIgnoreCase("// Monkey finished")){
                 		success = true;
                 	}
                 }
@@ -276,10 +276,15 @@ public class Monkey {
             }
             
             if(success){
-            	text.append("本次monkey结束，请查看日志。");
-            	writer.write("本次monkey结束，请查看日志。");
+            	if(flag){
+            		text.append("本次monkey结束，检测到应用崩溃，请查看日志。\n");
+                	writer.write("本次monkey结束，检测到应用崩溃，请查看日志。\n");
+            	}else{
+            		text.append("本次monkey结束，未发生崩溃，请查看日志。\n");
+                	writer.write("本次monkey结束，未发生崩溃，请查看日志。\n");
+            	}
             }else{
-            	text.append("monkey发生未知错误，执行失败。");
+            	text.append("monkey发生未知错误，执行失败。\n");
             }
                     
             writer.close();
