@@ -274,11 +274,19 @@ public class Monkey {
                 }	
                 
             }
+            
+            if(success){
+            	text.append("本次monkey结束，未发生诚然是，完成！");
+            	writer.write("本次monkey结束，未发生诚然是，完成！");
+            }else{
+            	text.append("本次monkey结束，检测到crash，请查看crash日志");
+            }
+                    
             writer.close();
             writer1.close();
 //            ret[0]= totalLog.toString();
 //            ret[1]= crashLog.toString();
-          
+           
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
