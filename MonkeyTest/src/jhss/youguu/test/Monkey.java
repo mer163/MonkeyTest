@@ -264,7 +264,7 @@ public class Monkey {
                     
                   }
                 if(flag){
-                	if(line.startsWith("// ")){
+                	if(line.startsWith("// ")&&!line.equalsIgnoreCase("// Monkey finished")){
                 		text.append(line+"\n");
                 		crashLog.append(line+"\n");	//写入日志
                 		writer1.write(line+"\r\n");
@@ -282,6 +282,7 @@ public class Monkey {
             	}else{
             		text.append("本次monkey结束，未发生崩溃，请查看日志。\n");
                 	writer.write("本次monkey结束，未发生崩溃，请查看日志。\n");
+                	writer1.write("本次monkey结束，未发生崩溃，请查看日志。\n");
             	}
             }else{
             	text.append("monkey发生未知错误，执行失败。\n");

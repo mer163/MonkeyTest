@@ -479,7 +479,7 @@ private static final long serialVersionUID = 1L;
 	 *  返回当前界面的activit
 	 * @return
 	 */
-	public String getFocusedPackageAndActivity() {
+	public String getFocusedPackageAndActivity() throws IndexOutOfBoundsException{
 		Pattern pattern = Pattern.compile("([a-zA-Z0-9.]+/.[a-zA-Z0-9.]+)");
 		
 			
