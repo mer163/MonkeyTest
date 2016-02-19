@@ -511,15 +511,35 @@ private static final long serialVersionUID = 1L;
 					}
 				}
 				try {
-					Thread.sleep(1000*60);
+					Thread.sleep(1000*60);//休息一分钟。
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				} //休息一分钟。
+				} 
 			}
 		});
 	    listener.start();
 	}
+	
+	/**
+	 * 判断手机屏幕是否点亮。
+	 * @return
+	 */
+	public boolean isScreenOn() {
+        String command = "dumpsys power";
+        try {
+            String powerState = ShellUtils.getShellOut(ShellUtils.shell("dumpsys power"));
+            if (powerState.indexOf("mscreenon=true") > -1
+                    || powerState.indexOf("mpowerstate=0") == -1) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    ;
 	
 	/**
 	 * 判断屏幕是否锁定
@@ -528,7 +548,7 @@ private static final long serialVersionUID = 1L;
 	public static Boolean isScreenLocked(){
 		
 		
-		return true;
+		return false;
 	}
 
 	/**
