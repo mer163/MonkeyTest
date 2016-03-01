@@ -214,9 +214,19 @@ public class Monkey {
         if(!(new File(path).isDirectory())){
         	new File(path).mkdir();
        	}
+        if(!(new File(path+"Monkey_log/").isDirectory())){
+        	new File(path+"Monkey_log/").mkdir();
+        }
+        if(!(new File(path+"Crash_log/").isDirectory())){
+        	new File(path+"Crash_log/").mkdir();
+        }
+        
+        
         
         File file = new File(path + "Monkey_log/" + Outlog.log.time() + ".txt");
+       
         File crashFile = new File(path+ "Crash_log/"+Outlog.log.time()+".txt");
+        
 //        File file = new File("data/local/tmp" + File.separator + time + ".txt");
         
         try {

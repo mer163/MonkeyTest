@@ -381,7 +381,7 @@ private static final long serialVersionUID = 1L;
 								    			+ " -s "+zscount+" "+throttle+" "+anyevent+" "+touch+" "
 								    			+motion +" "+trackball +" "+syskeys+" " +appswitch+" -v-v-v "+count;
 			//					    			+" > "+path+log.time()+".txt";
-									
+										System.out.println(cmd);
 								    	txt.append("---------------------------\n总共循环"+counts+"次，第"+i+"次循环monkey\n");
 								    	System.out.println("start---------------------");
 								    	
